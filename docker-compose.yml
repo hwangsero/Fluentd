@@ -1,0 +1,18 @@
+version: "3"
+services:
+  fluentd_test:
+    container_name: 'fluentd_test'
+    image: fluentd:2022.08
+    volumes:
+      - ../fluentd_to_hdfs_test:/fluentd/etc
+      - /Users/hwangsero/log/fluentd:/fluentd/log
+    ports:
+      - 9883:9880
+    command:
+      -c /fluentd/etc/fluentd1.conf
+    privileged: true
+
+networks:
+  default:
+    external:
+      name: hadoop_network
